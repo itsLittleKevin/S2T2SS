@@ -1,0 +1,244 @@
+# S2T2SS - Speech-to-Text-to-Speech-Synthesis
+# Git ignore file for Python AI/ML project
+
+# ================================================================
+# Python
+# ================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# ================================================================
+# Virtual Environments
+# ================================================================
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.conda/
+
+# ================================================================
+# IDE and Editors
+# ================================================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+
+# ================================================================
+# AI/ML Models and Data
+# ================================================================
+# Large model files
+*.bin
+*.safetensors
+*.gguf
+*.onnx
+*.tflite
+*.pb
+*.h5
+*.hdf5
+models/
+checkpoints/
+weights/
+
+# ModelScope and Hugging Face cache
+.cache/
+hub/
+transformers_cache/
+modelscope/
+
+# ASR Models (FunASR downloads)
+asr/models/models/
+asr/models/speech_*
+
+# RVC Models (voice conversion models)
+rvc_models/characters/*.pth
+rvc_models/celebrities/*.pth
+rvc_models/custom/*.pth
+rvc/RVC-Package/
+rvc/RVC-Project/assets/
+rvc/RVC-Project/logs/
+rvc/RVC-Project/weights/
+
+# ================================================================
+# Audio and Media Files
+# ================================================================
+*.wav
+*.mp3
+*.flac
+*.ogg
+*.m4a
+*.aac
+*.wma
+
+# Voice samples (keep structure but not files)
+core/data/voice_samples/*.wav
+core/data/voice_samples/*.mp3
+!core/data/voice_samples/README.md
+
+# Audio cache
+core/data/cache/
+temp_audio/
+audio_cache/
+
+# ================================================================
+# Data and Logs
+# ================================================================
+# Generated data files
+*.log
+*.txt
+*.srt
+logs/
+temp.log
+
+# Configuration with sensitive data
+config_local.json
+secrets.json
+.env.local
+
+# Session data
+core/data/input.txt
+core/data/output.txt
+core/data/input.srt
+core/data/output.srt
+core/data/live_caption.txt
+core/data/raw_caption.txt
+core/data/buffer_caption.txt
+
+# Keep config template but not actual config
+!config_template.json
+
+# ================================================================
+# System and OS
+# ================================================================
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ================================================================
+# Jupyter Notebooks
+# ================================================================
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+profile_default/
+ipython_config.py
+
+# ================================================================
+# Testing and Coverage
+# ================================================================
+.coverage
+.pytest_cache/
+.tox/
+.nox/
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+nosetests.xml
+
+# ================================================================
+# Documentation
+# ================================================================
+docs/_build/
+site/
+
+# ================================================================
+# Docker
+# ================================================================
+.dockerignore
+Dockerfile.dev
+docker-compose.override.yml
+
+# ================================================================
+# Project Specific
+# ================================================================
+# Setup and installation reports
+setup_report.json
+
+# Temporary files
+temp/
+tmp/
+
+# User-specific voice samples (example files OK)
+sample02.wav
+sample.wav
+voice_sample.wav
+
+# Large dependency packages
+torch/
+transformers/
+site-packages/
+
+# ================================================================
+# Keep Important Structure Files
+# ================================================================
+# Keep directory structure indicators
+!**/.gitkeep
+!**/README.md
+
+# Keep example configurations
+!config_template.json
+!core/data/s2t2ss_config.json.example
+
+# Keep documentation
+!docs/
+!*.md
+
+# Keep requirements and setup
+!requirements.txt
+!setup.py
+!pyproject.toml

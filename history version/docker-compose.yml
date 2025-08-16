@@ -1,0 +1,143 @@
+version: '3.8'
+
+services:
+  # Main S2T2SS application
+  s2t2ss:
+    build: .
+    container_name: s2t2ss_main
+    restart: unless-stopped
+    
+    # GPU support
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    
+    # Volume mounts for persistence
+    volumes:
+      - ./config:/app/config
+      - ./models:/app/models
+      - ./rvc_models:/app/rvc_models
+      - ./logs:/app/logs
+      - audio_data:/app/audio
+    
+    # Port mapping
+    ports:
+      - "8000:8000"
+    
+    # Environment variables
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+      - PYTHONUNBUFFERED=1
+      - NARRATOR_MODE=direct
+      - ENABLE_RVC_CONVERSION=true
+    
+    # Audio device access (Linux)
+    devices:
+      - /dev/snd:/dev/snd
+    
+    # Dependencies
+    depends_on:
+      - lm-studio
+    
+    # Network
+    networks:
+      - s2t2ss_network
+
+  # LM Studio server for LLM processing
+  lm-studio:
+    image: lmstudio/server:latest
+    container_name: s2t2ss_llm
+    restart: unless-stopped
+    
+    # GPU support for LLM
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    
+    # Volume for models
+    volumes:
+      - ./lm_studio_models:/root/.cache/lm-studio
+    
+    # Port mapping
+    ports:
+      - "1234:1234"
+    
+    # Environment variables
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+      - MODEL_PATH=/root/.cache/lm-studio/models
+    
+    # Network
+    networks:
+      - s2t2ss_network
+    
+    # Health check
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:1234/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Optional: Web interface for monitoring
+  web-interface:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    container_name: s2t2ss_web
+    restart: unless-stopped
+    
+    # Port mapping
+    ports:
+      - "3000:3000"
+    
+    # Dependencies
+    depends_on:
+      - s2t2ss
+    
+    # Network
+    networks:
+      - s2t2ss_network
+
+  # Optional: Audio streaming service
+  audio-service:
+    image: pulseaudio/pulseaudio:latest
+    container_name: s2t2ss_audio
+    restart: unless-stopped
+    
+    # Audio device access
+    devices:
+      - /dev/snd:/dev/snd
+    
+    # Volume for audio configuration
+    volumes:
+      - ./audio_config:/etc/pulse
+    
+    # Network mode for audio sharing
+    network_mode: host
+    
+    # Environment
+    environment:
+      - PULSE_SERVER=unix:/tmp/pulse-socket
+
+# Named volumes
+volumes:
+  audio_data:
+    driver: local
+  model_cache:
+    driver: local
+
+# Custom network
+networks:
+  s2t2ss_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

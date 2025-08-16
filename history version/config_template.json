@@ -1,0 +1,63 @@
+{
+  "_comment": "S2T2SS Configuration Template - Easy deployment settings",
+  
+  "deployment": {
+    "version": "1.0.0",
+    "setup_date": "auto-generated",
+    "platform": "auto-detected"
+  },
+  
+  "language_pairs": {
+    "default": "chinese_to_english",
+    "available": [
+      "chinese_to_english",
+      "english_to_chinese", 
+      "chinese_to_japanese",
+      "english_to_japanese",
+      "auto_to_english",
+      "auto_to_chinese"
+    ]
+  },
+  
+  "narrator_modes": {
+    "default": "direct",
+    "available": [
+      "direct",
+      "first_person",
+      "casual_narrator", 
+      "professional_narrator",
+      "adaptive",
+      "translate"
+    ]
+  },
+  
+  "audio": {
+    "enable_tts": true,
+    "enable_vb_audio": true,
+    "sample_rate": 16000,
+    "chunk_duration": 5.0,
+    "voice_reference": "sample02.wav"
+  },
+  
+  "performance": {
+    "use_gpu": true,
+    "buffer_size": 1,
+    "similarity_threshold": 0.80,
+    "tts_speed": 1.0,
+    "max_caption_width": 30,
+    "enable_emotion_detection": true
+  },
+  
+  "paths": {
+    "models_dir": "models",
+    "voice_samples_dir": ".",
+    "logs_dir": "logs"
+  },
+  
+  "advanced": {
+    "enable_dynamic_voices": false,
+    "enable_similarity_detection": true,
+    "auto_clear_captions": true,
+    "silence_threshold": 5.5
+  }
+}

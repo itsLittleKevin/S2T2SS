@@ -1,0 +1,19 @@
+{
+  "timestamp": "2025-08-15T08:53:47.530111",
+  "platform": "Windows",
+  "python_version": "3.13.1",
+  "total_checks": 9,
+  "passed_checks": 5,
+  "status": "\u274c INCOMPLETE",
+  "results": {
+    "python": true,
+    "gpu": true,
+    "audio": false,
+    "speech_recognition": true,
+    "text_to_speech": false,
+    "japanese_support": false,
+    "llm_server": true,
+    "voice_files": false,
+    "rvc_models": true
+  }
+}
