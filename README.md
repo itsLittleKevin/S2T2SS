@@ -35,7 +35,7 @@
 ## 2. Clone & Prepare the S2T2SS Repository
 
 ```powershell
-git clone <your-repo-url>
+git clone https://github.com/itsLittleKevin/S2T2SS
 cd S2T2SS
 ```
 
